@@ -13,6 +13,7 @@ defmodule BlogPhxWeb.Router do
   pipeline :api do
     plug :accepts, ["json"]
   end
+
   # coveralls-ignore-stop
 
   scope "/", BlogPhxWeb do
@@ -42,5 +43,6 @@ defmodule BlogPhxWeb.Router do
       live_dashboard "/dashboard", metrics: BlogPhxWeb.Telemetry
     end
   end
+
   # coveralls-ignore-stop
 end
