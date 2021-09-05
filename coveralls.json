@@ -1,0 +1,16 @@
+{
+  "skip_files": [
+    "lib/blog_phx/application.ex",
+    "lib/blog_phx/release.ex",
+    "lib/blog_phx_web.ex",
+    "lib/blog_phx_web/views/error_helpers.ex",
+    "test/support/channel_case.ex",
+    "test/support/data_case.ex",
+    "lib/blog_phx_web/telemetry.ex"
+  ],
+  "coverage_options": {
+    "treat_no_relevant_lines_as_covered": true,
+    "output_dir": "cover/",
+    "minimum_coverage": 90
+  }
+}
