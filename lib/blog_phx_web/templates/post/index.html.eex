@@ -1,0 +1,27 @@
+<ul class="collection with-header">
+  <li class="collection-header">
+    <h4>All Posts</h4>
+  </li>
+  <%= for post <- @posts do %>
+  <li class="collection-item">
+    <div>
+      <%= post.title %>
+      <%= link to: Routes.post_path(@conn, :show, post), class: "secondary-content" do %>
+        <i class="material-icons blue-text">send</i>
+      <% end %>
+      <a href="#!" class="secondary-content">
+        <i class="material-icons red-text">edit</i>
+      </a>
+      <a href="#!" class="secondary-content">
+        <i class="material-icons green-text">delete</i>
+      </a>
+    </div>
+  </li>
+  <% end %>
+</ul>
+
+<div class="fixed-action-btn">
+  <a class="btn-floating btn-large red">
+    <i class="large material-icons">add</i>
+  </a>
+</div>
