@@ -1,0 +1,14 @@
+<div class="card hoverable">
+  <div class="card-content">
+    <p class="grey-text right">
+      Posted in
+      <%= @post.updated_at %>
+    </p>
+    <h5>
+      <%= @post.title %>
+    </h5>
+    <p class="grey-text text-darken-2">
+      <%= @post.description %>
+    </p>
+  </div>
+</div>
