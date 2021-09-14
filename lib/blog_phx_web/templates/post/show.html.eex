@@ -1,14 +1,19 @@
-<div class="card hoverable">
-  <div class="card-content">
-    <p class="grey-text right">
-      Posted in
-      <%= @post.updated_at %>
-    </p>
-    <h5>
-      <%= @post.title %>
-    </h5>
-    <p class="grey-text text-darken-2">
-      <%= @post.description %>
-    </p>
+<div class="section valign-wrapper">
+  <div class="card">
+    <div class="card-content">
+      <%= link to: Routes.page_path(@conn, :index), class: "btn-floating halfway-fab waves-effect waves-light" do %>
+        <i class="material-icons">chevron_left</i>
+      <% end %>
+      <p class="grey-text right">
+        Posted in
+        <%= @post.updated_at %>
+      </p>
+      <h5>
+        <%= @post.title %>
+      </h5>
+      <p class="grey-text text-darken-2">
+        <%= @post.description %>
+      </p>
+    </div>
   </div>
 </div>
