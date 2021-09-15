@@ -19,7 +19,9 @@
         <ul id="nav-mobile" class="right hide-on-med-and-down">
           <li><a href="#">Bem vindo</a></li>
           <li><a href="#">Postar</a></li>
-          <li><a href="#">Posts</a></li>
+          <li>
+            <%= link "Posts", to: Routes.post_path(@conn, :index) %>
+          </li>
         </ul>
       </div>
     </nav>
