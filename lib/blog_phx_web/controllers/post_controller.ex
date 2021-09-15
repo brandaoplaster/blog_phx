@@ -12,4 +12,9 @@ defmodule BlogPhxWeb.PostController do
     post = BlogPhx.Repo.get!(Post, id)
     render(conn, "show.html", post: post)
   end
+
+  def new(conn, _params) do
+    changeset = Post.changeset(%Post{})
+    render(conn, "new.html", changeset: changeset)
+  end
 end
