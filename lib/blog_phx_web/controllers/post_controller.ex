@@ -17,4 +17,20 @@ defmodule BlogPhxWeb.PostController do
     changeset = Post.changeset(%Post{})
     render(conn, "new.html", changeset: changeset)
   end
+
+  def create(conn, %{"post" => post}) do
+    post =
+      Post.changeset(%Post{}, post)
+      |> BlogPhx.Repo.insert()
+
+    case post do
+      {:ok, post} ->
+        conn
+        |> put_flash(:info, "Post created successfully!")
+        |> redirect(to: Routes.post_path(conn, :show, post))
+
+      {:error, changeset} ->
+        render(conn, "new.html", changeset: changeset)
+    end
+  end
 end
