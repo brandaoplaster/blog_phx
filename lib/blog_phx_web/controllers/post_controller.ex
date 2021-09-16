@@ -33,4 +33,13 @@ defmodule BlogPhxWeb.PostController do
         render(conn, "new.html", changeset: changeset)
     end
   end
+
+  def delete(conn, %{"id" => id}) do
+    post = BlogPhx.Repo.get!(Post, id)
+    BlogPhx.Repo.delete!(post)
+
+    conn
+    |> put_flash(:info, "Post deleted!")
+    |> redirect(to: Routes.post_path(conn, :index))
+  end
 end

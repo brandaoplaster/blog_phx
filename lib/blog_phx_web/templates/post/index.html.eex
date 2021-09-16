@@ -6,15 +6,15 @@
   <li class="collection-item">
     <div>
       <%= post.title %>
-      <%= link to: Routes.post_path(@conn, :show, post), class: "secondary-content" do %>
-        <i class="material-icons blue-text">send</i>
+      <%= link to: Routes.post_path(@conn, :delete, post), method: :delete, data: [confirm: "Are you sure about this action?"], class: "secondary-content"  do %>
+        <i class="material-icons green-text">delete</i>
       <% end %>
       <a href="#!" class="secondary-content">
         <i class="material-icons red-text">edit</i>
       </a>
-      <a href="#!" class="secondary-content">
-        <i class="material-icons green-text">delete</i>
-      </a>
+      <%= link to: Routes.post_path(@conn, :show, post), class: "secondary-content" do %>
+        <i class="material-icons blue-text">send</i>
+      <% end %>
     </div>
   </li>
   <% end %>
