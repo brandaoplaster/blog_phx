@@ -42,4 +42,28 @@ defmodule BlogPhxWeb.PostController do
     |> put_flash(:info, "Post deleted!")
     |> redirect(to: Routes.post_path(conn, :index))
   end
+
+  def edit(conn, %{"id" => id}) do
+    post = BlogPhx.Repo.get(Post, id)
+    changeset = Post.changeset(post)
+    render(conn, "edit.html", post: post, changeset: changeset)
+  end
+
+  def update(conn, %{"id" => id, "post" => post_params}) do
+    post = BlogPhx.Repo.get(Post, id)
+
+    changeset = Post.changeset(post, post_params)
+
+    post = BlogPhx.Repo.update(changeset)
+
+    case post do
+      {:ok, post} ->
+        conn
+        |> put_flash(:info, "Post updated successfully!")
+        |> redirect(to: Routes.post_path(conn, :show, post))
+
+      {:error, changeset} ->
+        render(conn, "new.html", changeset: changeset)
+    end
+  end
 end

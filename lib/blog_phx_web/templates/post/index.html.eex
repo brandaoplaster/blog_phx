@@ -9,9 +9,9 @@
       <%= link to: Routes.post_path(@conn, :delete, post), method: :delete, data: [confirm: "Are you sure about this action?"], class: "secondary-content"  do %>
         <i class="material-icons green-text">delete</i>
       <% end %>
-      <a href="#!" class="secondary-content">
+      <%= link to: Routes.post_path(@conn, :edit, post), class: "secondary-content" do %>
         <i class="material-icons red-text">edit</i>
-      </a>
+      <% end %>
       <%= link to: Routes.post_path(@conn, :show, post), class: "secondary-content" do %>
         <i class="material-icons blue-text">send</i>
       <% end %>
