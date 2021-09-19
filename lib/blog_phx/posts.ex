@@ -24,6 +24,6 @@ defmodule BlogPhx.Posts do
 
   def delete_post(id) do
     get_post(id)
-    |> Repo.delete()
+    |> Repo.delete!()
   end
 end
