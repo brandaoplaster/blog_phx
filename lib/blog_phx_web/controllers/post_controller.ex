@@ -33,6 +33,7 @@ defmodule BlogPhxWeb.PostController do
 
   def delete(conn, %{"id" => id}) do
     Posts.delete_post(id)
+
     conn
     |> put_flash(:info, "Post deleted!")
     |> redirect(to: Routes.post_path(conn, :index))
