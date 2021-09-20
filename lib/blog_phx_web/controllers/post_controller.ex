@@ -1,15 +1,16 @@
 defmodule BlogPhxWeb.PostController do
   use BlogPhxWeb, :controller
 
+  alias BlogPhx.Posts
   alias BlogPhx.Posts.Post
 
   def index(conn, _params) do
-    posts = BlogPhx.Repo.all(Post)
+    posts = Posts.list_post()
     render(conn, "index.html", posts: posts)
   end
 
   def show(conn, %{"id" => id}) do
-    post = BlogPhx.Repo.get!(Post, id)
+    post = Posts.get_post(id)
     render(conn, "show.html", post: post)
   end
 
@@ -19,11 +20,7 @@ defmodule BlogPhxWeb.PostController do
   end
 
   def create(conn, %{"post" => post}) do
-    post =
-      Post.changeset(%Post{}, post)
-      |> BlogPhx.Repo.insert()
-
-    case post do
+    case Posts.create_post(post) do
       {:ok, post} ->
         conn
         |> put_flash(:info, "Post created successfully!")
@@ -35,8 +32,7 @@ defmodule BlogPhxWeb.PostController do
   end
 
   def delete(conn, %{"id" => id}) do
-    post = BlogPhx.Repo.get!(Post, id)
-    BlogPhx.Repo.delete!(post)
+    Posts.delete_post(id)
 
     conn
     |> put_flash(:info, "Post deleted!")
@@ -50,13 +46,7 @@ defmodule BlogPhxWeb.PostController do
   end
 
   def update(conn, %{"id" => id, "post" => post_params}) do
-    post = BlogPhx.Repo.get(Post, id)
-
-    changeset = Post.changeset(post, post_params)
-
-    post = BlogPhx.Repo.update(changeset)
-
-    case post do
+    case Posts.update_post(id, post_params) do
       {:ok, post} ->
         conn
         |> put_flash(:info, "Post updated successfully!")
