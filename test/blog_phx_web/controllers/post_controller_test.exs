@@ -35,4 +35,12 @@ defmodule BlogPhxWeb.PostControllerTest do
     conn = get(conn, Routes.post_path(conn, :show, id))
     assert html_response(conn, 200) =~ "Rails"
   end
+
+  test "action :delete for a post", %{conn: conn} do
+    {:ok, post} = Posts.create_post(@valid_post)
+    conn = delete(conn, Routes.post_path(conn, :delete, post))
+    assert redirected_to(conn) == Routes.post_path(conn, :index)
+
+    assert_error_sent 404, fn -> get(conn, Routes.post_path(conn, :show, post)) end
+  end
 end
