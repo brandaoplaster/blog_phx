@@ -25,4 +25,14 @@ defmodule BlogPhxWeb.PostControllerTest do
     conn = get(conn, Routes.post_path(conn, :new))
     assert html_response(conn, 200) =~ "Create Post"
   end
+
+  test "action :create for new posts", %{conn: conn} do
+    conn = post(conn, Routes.post_path(conn, :create), post: @valid_post)
+
+    assert %{id: id} = redirected_params(conn)
+    assert redirected_to(conn) == Routes.post_path(conn, :show, id)
+
+    conn = get(conn, Routes.post_path(conn, :show, id))
+    assert html_response(conn, 200) =~ "Rails"
+  end
 end
