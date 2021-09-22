@@ -52,8 +52,8 @@ defmodule BlogPhx.Comments do
   """
   def create_comment(post_id, attrs \\ %{}) do
     Posts.get_post(post_id)
-    |> Ecto.build_assoc(:comments)
-    |> Comment.changeset(attrs)
+    |> Ecto.build_assoc(:commnets)
+    |> change_comment(attrs)
     |> Repo.insert()
   end
 
