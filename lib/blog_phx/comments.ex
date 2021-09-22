@@ -7,6 +7,7 @@ defmodule BlogPhx.Comments do
   alias BlogPhx.Repo
 
   alias BlogPhx.Comments.Comment
+  alias BlogPhx.Posts
 
   @doc """
   Returns the list of comments.
@@ -49,8 +50,9 @@ defmodule BlogPhx.Comments do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_comment(attrs \\ %{}) do
-    %Comment{}
+  def create_comment(post_id, attrs \\ %{}) do
+    Posts.get_post(post_id)
+    |> Ecto.build_assoc(:comments)
     |> Comment.changeset(attrs)
     |> Repo.insert()
   end
