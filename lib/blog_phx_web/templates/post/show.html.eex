@@ -52,3 +52,10 @@
     </li>
   </ul>
 </div>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    window.createSocket( <%= @post.id %> )
+  })
+</script>
