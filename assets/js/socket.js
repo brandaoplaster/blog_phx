@@ -70,6 +70,14 @@ const createSocket = (post_id) => {
     .receive("error", resp => {
       console.log("Unable to join", resp)
     })
+
+  document.getElementById("btn-comment".addEventListener("click", () => {
+    const content = document.getElementById("comment").value
+    channel.push("comment:add", {
+      content: content
+    })
+    document.getElementById("comment").value = ""
+  }))
 }
 
 window.createSocket = createSocket

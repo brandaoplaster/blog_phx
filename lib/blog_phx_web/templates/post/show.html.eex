@@ -24,13 +24,13 @@
   <form class="col s12">
     <div class="row">
       <div class="input-field col s10">
-        <textarea id="textarea1" class="materialize-textarea"></textarea>
-        <label for="textarea1">Comment</label>
+        <textarea id="comment" class="materialize-textarea"></textarea>
+        <label for="comment">Comment</label>
       </div>
 
       <div class="input-field col s2">
         <button class="btn waves-effect waves-light" type="submit" name="action">Submit
-          <i class="material-icons right">send</i>
+          <i class="material-icons right" id="btn-comment">send</i>
         </button>
       </div>
     </div>
