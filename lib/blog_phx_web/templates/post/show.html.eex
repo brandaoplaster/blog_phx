@@ -29,8 +29,9 @@
       </div>
 
       <div class="input-field col s2">
-        <button class="btn waves-effect waves-light" type="submit" name="action">Submit
-          <i class="material-icons right" id="btn-comment">send</i>
+        <button class="btn waves-effect waves-light" id="btn-comment">
+          Submit
+          <i class="material-icons right">send</i>
         </button>
       </div>
     </div>
@@ -40,16 +41,7 @@
 
 <div class="section">
   <ul class="collection">
-    <li class="collection-item avatar">
-      <i class="material-icons circle red">play_arrow</i>
-      <span class="title">Title</span>
-      <p>
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-        standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make
-        a
-        type specimen book.
-      </p>
-    </li>
+
   </ul>
 </div>
 
