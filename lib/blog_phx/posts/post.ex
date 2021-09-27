@@ -13,7 +13,7 @@ defmodule BlogPhx.Posts.Post do
     field :title, :string
     field :description, :string
 
-    has_many :commnets, Comment
+    has_many :comments, Comment
     timestamps()
   end
 
