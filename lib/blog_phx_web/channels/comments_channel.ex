@@ -6,7 +6,7 @@ defmodule BlogPhxWeb.CommentsChannel do
 
   def join("comments:" <> post_id, _payload, socket) do
     post = BlogPhx.Posts.get_post_with_comments(post_id)
-    {:ok, %{comments: post.commments}, assign(socket, :post_id, post.id)}
+    {:ok, %{comments: post.comments}, assign(socket, :post_id, post.id)}
   end
 
   def handle_in("comment:add", content, socket) do
@@ -14,6 +14,12 @@ defmodule BlogPhxWeb.CommentsChannel do
       socket.assigns.post_id
       |> BlogPhx.Comments.create_comment(content)
 
-    {:reply, :ok, socket}
+    case response do
+      {:ok, _comment} ->
+        {:reply, :ok, socket}
+
+      {:error, changeset} ->
+        {:reply, {:error, %{errors: changeset}}}
+    end
   end
 end
