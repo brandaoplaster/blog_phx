@@ -15,7 +15,9 @@ defmodule BlogPhxWeb.CommentsChannel do
       |> BlogPhx.Comments.create_comment(content)
 
     case response do
-      {:ok, _comment} ->
+      {:ok, comment} ->
+        broadcast!(socket, "comments:#{socket.assigns.post_id}:new", %{comment: comment})
+
         {:reply, :ok, socket}
 
       {:error, changeset} ->

@@ -29,10 +29,10 @@
       </div>
 
       <div class="input-field col s2">
-        <button class="btn waves-effect waves-light" id="btn-comment">
+        <a class="btn waves-effect waves-light" id="btn-comment">
           Submit
           <i class="material-icons right">send</i>
-        </button>
+        </a>
       </div>
     </div>
   </form>
