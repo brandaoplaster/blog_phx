@@ -28,7 +28,7 @@ defmodule BlogPhx.MixProject do
   def application do
     [
       mod: {BlogPhx.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :ueberauth_google]
     ]
   end
 
@@ -56,7 +56,7 @@ defmodule BlogPhx.MixProject do
       {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
       {:sobelow, "~> 0.8", only: :dev},
       {:excoveralls, "~> 0.10", only: :test},
-      {:ueberauth_google, "~> 0.10"}
+      {:ueberauth_google, "~> 0.9"}
     ]
   end
 
