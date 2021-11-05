@@ -12,6 +12,5 @@ defmodule BlogPhx.Repo.Migrations.CreateUsers do
 
       timestamps()
     end
-
   end
 end

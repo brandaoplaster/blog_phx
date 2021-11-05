@@ -6,9 +6,30 @@ defmodule BlogPhx.AccountsTest do
   describe "users" do
     alias BlogPhx.Accounts.User
 
-    @valid_attrs %{email: "some email", first_name: "some first_name", image: "some image", last_name: "some last_name", provider: "some provider", token: "some token"}
-    @update_attrs %{email: "some updated email", first_name: "some updated first_name", image: "some updated image", last_name: "some updated last_name", provider: "some updated provider", token: "some updated token"}
-    @invalid_attrs %{email: nil, first_name: nil, image: nil, last_name: nil, provider: nil, token: nil}
+    @valid_attrs %{
+      email: "some email",
+      first_name: "some first_name",
+      image: "some image",
+      last_name: "some last_name",
+      provider: "some provider",
+      token: "some token"
+    }
+    @update_attrs %{
+      email: "some updated email",
+      first_name: "some updated first_name",
+      image: "some updated image",
+      last_name: "some updated last_name",
+      provider: "some updated provider",
+      token: "some updated token"
+    }
+    @invalid_attrs %{
+      email: nil,
+      first_name: nil,
+      image: nil,
+      last_name: nil,
+      provider: nil,
+      token: nil
+    }
 
     def user_fixture(attrs \\ %{}) do
       {:ok, user} =
