@@ -18,6 +18,6 @@ defmodule BlogPhx.Accounts.User do
   def changeset(user, attrs) do
     user
     |> cast(attrs, [:first_name, :last_name, :image, :provider, :email, :token])
-    |> validate_required([:first_name, :last_name, :image, :provider, :email, :token])
+    |> validate_required([:provider, :email, :token])
   end
 end
