@@ -27,6 +27,7 @@ defmodule BlogPhxWeb.Router do
   scope "/auth", BlogPhxWeb do
     pipe_through :browser
 
+    get "/logout", AuthController, :logout
     get "/:provider", AuthController, :request
     get "/:provider/callback", AuthController, :callback
   end

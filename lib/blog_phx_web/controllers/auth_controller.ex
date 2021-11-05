@@ -28,4 +28,10 @@ defmodule BlogPhxWeb.AuthController do
         |> redirect(to: Routes.page_path(conn, :index))
     end
   end
+
+  def logout(conn, _) do
+    conn
+    |> configure_session(drop: true)
+    |> redirect(to: Routes.page_path(conn, :index))
+  end
 end
