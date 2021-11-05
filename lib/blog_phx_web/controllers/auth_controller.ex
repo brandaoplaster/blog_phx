@@ -1,11 +1,30 @@
 defmodule BlogPhxWeb.AuthController do
   use BlogPhxWeb, :controller
 
-  def request(conn, _params) do
-    render(conn, "index.html")
-  end
+  plug Ueberauth
 
-  def callback(conn, _params) do
-    render(conn, "index.html")
+  alias BlogPhx.Accounts
+
+  def callback(%{assigns: %{ueberauth_auth: auth}} = conn, %{"provider" => provider}) do
+    user = %{
+      token: auth.credentials.token,
+      email: auth.info.first_name,
+      last_name: auth.info.last_name,
+      image: auth.info.image,
+      provider: provider
+    }
+
+    case Accounts.create_user(user) do
+      {:ok, user} ->
+        conn
+        |> put_flash(:info, "Wellcome #{user.email}")
+        |> put_session(:user_id, user.id)
+        |> redirect(to: Routes.page_path(conn, :index))
+
+      {:error, _error} ->
+        conn
+        |> put_flash(:info, "Something went wrong!")
+        |> redirect(to: Routes.page_path(conn, :index))
+    end
   end
 end
