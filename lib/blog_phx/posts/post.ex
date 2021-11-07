@@ -5,6 +5,7 @@ defmodule BlogPhx.Posts.Post do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias BlogPhx.Accounts.User
   alias BlogPhx.Comments.Comment
 
   @required_fields ~w(title description)a
@@ -13,6 +14,7 @@ defmodule BlogPhx.Posts.Post do
     field :title, :string
     field :description, :string
 
+    belongs_to :user, User
     has_many :comments, Comment
     timestamps()
   end
