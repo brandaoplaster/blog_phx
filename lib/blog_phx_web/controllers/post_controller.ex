@@ -6,6 +6,7 @@ defmodule BlogPhxWeb.PostController do
   alias BlogPhxWeb.Plug.RequiredAuth
 
   plug RequiredAuth when action in [:index, :new, :edit, :update, :delete]
+  plug :check_owner when action in [:edit, :update, :delete]
 
   def index(conn, _params) do
     posts = Posts.list_post()
@@ -57,6 +58,19 @@ defmodule BlogPhxWeb.PostController do
 
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
+    end
+  end
+
+  defp check_owner(%{"id" => post_id} = conn, _) do
+    case Posts.get_post(post_id).user_id == conn.assings.user.id do
+      true ->
+        conn
+
+      false ->
+        conn
+        |> put_flash(:error, "No permission for this operation.")
+        |> redirect(to: Routes.page_path(conn, :index))
+        |> halt()
     end
   end
 end
