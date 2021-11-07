@@ -3,6 +3,9 @@ defmodule BlogPhxWeb.PostController do
 
   alias BlogPhx.Posts
   alias BlogPhx.Posts.Post
+  alias BlogPhxWeb.Plug.RequiredAuth
+
+  plug RequiredAuth when action in [:index, :new, :edit, :update, :delete]
 
   def index(conn, _params) do
     posts = Posts.list_post()
