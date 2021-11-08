@@ -62,7 +62,7 @@ defmodule BlogPhxWeb.PostController do
   end
 
   defp check_owner(%{"id" => post_id} = conn, _) do
-    case Posts.get_post(post_id).user_id == conn.assings.user.id do
+    case Posts.get_post(post_id).user_id == conn.assigns.user.id do
       true ->
         conn
 

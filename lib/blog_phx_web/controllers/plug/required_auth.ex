@@ -6,7 +6,7 @@ defmodule BlogPhxWeb.Plug.RequiredAuth do
   def init(_), do: nil
 
   def call(conn, _) do
-    if conn.assings[:user] do
+    if conn.assigns[:user] do
       conn
     else
       conn
