@@ -3,9 +3,8 @@ defmodule BlogPhxWeb.PostController do
 
   alias BlogPhx.Posts
   alias BlogPhx.Posts.Post
-  alias BlogPhxWeb.Plug.RequiredAuth
 
-  plug RequiredAuth when action in [:index, :new, :edit, :update, :delete]
+  plug BlogPhxWeb.Plug.RequiredAuth when action in [:create, :new, :edit, :update, :delete]
   plug :check_owner when action in [:edit, :update, :delete]
 
   def index(conn, _params) do
@@ -61,7 +60,9 @@ defmodule BlogPhxWeb.PostController do
     end
   end
 
-  defp check_owner(%{"id" => post_id} = conn, _) do
+  def check_owner(conn, _) do
+    %{params: %{"id" => post_id}} = conn
+
     case Posts.get_post(post_id).user_id == conn.assigns.user.id do
       true ->
         conn
