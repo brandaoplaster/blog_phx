@@ -21,6 +21,15 @@ user_params = %{
   provider: "google"
 }
 
+user_params_1 = %{
+  token: "token-asihaish",
+  email: "user_1@test.com",
+  first_name: "first test",
+  last_name: "last test",
+  image: "link image",
+  provider: "google"
+}
+
 post_params = %{
   title: "PG",
   description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.
@@ -34,4 +43,5 @@ post_params = %{
 }
 
 {:ok, user} = Accounts.create_user(user_params)
+{:ok, _user_1} = Accounts.create_user(user_params_1)
 {:ok, _post} = Posts.create_post(user, post_params)
