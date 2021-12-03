@@ -9,6 +9,11 @@ defmodule BlogPhxWeb.PostControllerTest do
     description: "Lorem..."
   }
 
+  @update_post %{
+    title: "update",
+    description: "update"
+  }
+
   def fixture(:post) do
     user = BlogPhx.Accounts.get_user!(1)
     {:ok, post} = BlogPhx.Posts.create_post(user, @valid_post)
@@ -61,6 +66,15 @@ defmodule BlogPhxWeb.PostControllerTest do
     assert html_response(conn, 200) =~ "Rails"
   end
 
+  test "when creating a post with invalid values", %{conn: conn} do
+    conn =
+      conn
+      |> Plug.Test.init_test_session(user_id: 1)
+      |> post(Routes.post_path(conn, :create), post: %{})
+
+    assert html_response(conn, 200) =~ "can&#39;t be blank"
+  end
+
   test "action :edit for a post", %{conn: conn} do
     user = Accounts.get_user!(1)
     {:ok, post} = Posts.create_post(user, @valid_post)
@@ -89,6 +103,28 @@ defmodule BlogPhxWeb.PostControllerTest do
 
   describe "tests with dependency on created post" do
     setup [:create_post]
+
+    test "when to change post with valid values", %{conn: conn, post: post} do
+      conn =
+        conn
+        |> Plug.Test.init_test_session(user_id: 1)
+        |> put(Routes.post_path(conn, :update, post), post: @update_post)
+
+      assert %{id: id} = redirected_params(conn)
+      assert redirected_to(conn) == Routes.post_path(conn, :show, id)
+
+      conn = get(conn, Routes.post_path(conn, :show, id))
+      assert html_response(conn, 200) =~ "update"
+    end
+
+    test "when changing post with invalid values", %{conn: conn, post: post} do
+      conn =
+        conn
+        |> Plug.Test.init_test_session(user_id: 1)
+        |> put(Routes.post_path(conn, :update, post), post: %{title: nil, description: nil})
+
+      assert html_response(conn, 200) =~ " data-error=\"wrong\""
+    end
 
     test "action :delete for a post", %{conn: conn, post: post} do
       conn =
