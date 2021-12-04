@@ -3,7 +3,7 @@ defmodule BlogPhxWeb.CommentsChannelTest do
 
   use BlogPhxWeb.ChannelCase
 
-  alias BlogPhx.Posts
+  alias BlogPhx.{Accounts, Posts}
   alias BlogPhxWeb.UserSocket
 
   @valid_post %{
@@ -12,7 +12,8 @@ defmodule BlogPhxWeb.CommentsChannelTest do
   }
 
   setup do
-    {:ok, post} = Posts.create_post(@valid_post)
+    user = Accounts.get_user!(1)
+    {:ok, post} = Posts.create_post(user, @valid_post)
     {:ok, socket} = connect(UserSocket, %{})
 
     {:ok, socket: socket, post: post}

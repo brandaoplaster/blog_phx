@@ -2,7 +2,7 @@ defmodule BlogPhx.Posts.PostTest do
   @moduledoc false
   use BlogPhx.DataCase
 
-  alias BlogPhx.Posts
+  alias BlogPhx.{Accounts, Posts}
   alias BlogPhx.Posts.Post
 
   @valid_post %{
@@ -16,19 +16,21 @@ defmodule BlogPhx.Posts.PostTest do
   }
 
   def post_fixture(_attrs \\ %{}) do
-    {:ok, post} = Posts.create_post(@valid_post)
+    user = Accounts.get_user!(1)
+    {:ok, post} = Posts.create_post(user, @valid_post)
     post
   end
 
   test "create_post/1 with valid params" do
-    assert {:ok, %Post{} = post} = Posts.create_post(@valid_post)
+    user = Accounts.get_user!(1)
+    assert {:ok, %Post{} = post} = Posts.create_post(user, @valid_post)
     assert post.title == "Rails"
     assert post.description == "Lorem..."
   end
 
   test "list_post/0 return all posts" do
-    post = post_fixture()
-    assert Posts.list_post() == [post]
+    post_fixture()
+    assert Posts.list_post() |> Enum.count() == 2
   end
 
   test "get_post/1 return all posts" do

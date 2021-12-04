@@ -9,12 +9,13 @@ defmodule BlogPhxWeb.Plug.SetUser do
 
   def call(conn, _) do
     user_id = get_session(conn, :user_id)
+    user = user_id && Accounts.get_user!(user_id)
 
-    cond do
-      user = user_id && Accounts.get_user!(user_id) ->
+    case user != nil do
+      true ->
         assign(conn, :user, user)
 
-      true ->
+      false ->
         assign(conn, :user, nil)
     end
   end
