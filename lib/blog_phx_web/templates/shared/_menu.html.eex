@@ -1,0 +1,13 @@
+<nav>
+  <div class="nav-wrapper">
+    <%= link "Blog PHX", to: Routes.page_path(@conn, :index), class: "brand-logo" %>
+    <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+    <ul class="right hide-on-med-and-down">
+      <%= render BlogPhxWeb.SharedView, "_links.html", assigns %>
+    </ul>
+  </div>
+</nav>
+
+<ul class="sidenav" id="mobile-demo">
+  <%= render BlogPhxWeb.SharedView, "_links.html", assigns %>
+</ul>

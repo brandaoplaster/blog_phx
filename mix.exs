@@ -28,7 +28,7 @@ defmodule BlogPhx.MixProject do
   def application do
     [
       mod: {BlogPhx.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :ueberauth_google]
     ]
   end
 
@@ -55,7 +55,8 @@ defmodule BlogPhx.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
       {:sobelow, "~> 0.8", only: :dev},
-      {:excoveralls, "~> 0.10", only: :test}
+      {:excoveralls, "~> 0.10", only: :test},
+      {:ueberauth_google, "~> 0.9"}
     ]
   end
 
@@ -70,7 +71,7 @@ defmodule BlogPhx.MixProject do
       setup: ["deps.get", "ecto.setup", "cmd npm install --prefix assets"],
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
-      test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"]
+      test: ["ecto.reset --quiet", "test"]
     ]
   end
 end

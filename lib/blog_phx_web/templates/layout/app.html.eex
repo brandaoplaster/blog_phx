@@ -13,18 +13,7 @@
 
 <body>
   <div class="navbar-fixed">
-    <nav>
-      <div class="nav-wrapper">
-        <a href="#" class="brand-logo">Blog PHX</a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-          <li><a href="#">Bem vindo</a></li>
-          <li><a href="#">Postar</a></li>
-          <li>
-            <%= link "Posts", to: Routes.post_path(@conn, :index) %>
-          </li>
-        </ul>
-      </div>
-    </nav>
+    <%= render BlogPhxWeb.SharedView, "_menu.html", assigns %>
   </div>
   <main role="main" class="container">
     <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>

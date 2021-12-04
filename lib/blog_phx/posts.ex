@@ -15,8 +15,9 @@ defmodule BlogPhx.Posts do
     |> Repo.preload(:comments)
   end
 
-  def create_post(attrs \\ %{}) do
-    %Post{}
+  def create_post(user, attrs \\ %{}) do
+    user
+    |> Ecto.build_assoc(:posts)
     |> Post.changeset(attrs)
     |> Repo.insert()
   end

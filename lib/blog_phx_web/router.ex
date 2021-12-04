@@ -7,6 +7,7 @@ defmodule BlogPhxWeb.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug BlogPhxWeb.Plug.SetUser
   end
 
   # coveralls-ignore-start
@@ -21,6 +22,14 @@ defmodule BlogPhxWeb.Router do
 
     get "/", PageController, :index
     resources "/posts", PostController
+  end
+
+  scope "/auth", BlogPhxWeb do
+    pipe_through :browser
+
+    get "/logout", AuthController, :logout
+    get "/:provider", AuthController, :request
+    get "/:provider/callback", AuthController, :callback
   end
 
   # Other scopes may use custom stacks.

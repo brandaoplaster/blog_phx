@@ -10,23 +10,38 @@
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
 
-alias BlogPhx.Posts.Post
-alias BlogPhx.Repo
+alias BlogPhx.{Accounts, Posts}
 
-post = %{
+user_params = %{
+  token: "token-asihaish",
+  email: "test@test.com",
+  first_name: "first test",
+  last_name: "last test",
+  image: "link image",
+  provider: "google"
+}
+
+user_params_1 = %{
+  token: "token-asihaish",
+  email: "user_1@test.com",
+  first_name: "first test",
+  last_name: "last test",
+  image: "link image",
+  provider: "google"
+}
+
+post_params = %{
   title: "PG",
-  description:
-    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+  description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+    when an unknown printer took a galley of type and scrambled it to make a type
+    specimen book. It has survived not only five centuries, but also the leap
+    into electronic typesetting, remaining essentially unchanged. It was
+    popularised in the 1960s with the release of Letraset sheets containing
+    Lorem Ipsum passages, and more recently with desktop publishing software
+    like Aldus PageMaker including versions of Lorem Ipsum."
 }
 
-post_1 = %{
-  title: "Ruby",
-  description:
-    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-}
-
-post_a = Post.changeset(%Post{}, post)
-post_b = Post.changeset(%Post{}, post_1)
-
-Repo.insert!(post_a)
-Repo.insert!(post_b)
+{:ok, user} = Accounts.create_user(user_params)
+{:ok, _user_1} = Accounts.create_user(user_params_1)
+{:ok, _post} = Posts.create_post(user, post_params)
