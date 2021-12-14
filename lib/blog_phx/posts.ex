@@ -12,7 +12,7 @@ defmodule BlogPhx.Posts do
 
   def get_post_with_comments(id) do
     Repo.get!(Post, id)
-    |> Repo.preload(:comments)
+    |> Repo.preload(comments: [:user])
   end
 
   def create_post(user, attrs \\ %{}) do
