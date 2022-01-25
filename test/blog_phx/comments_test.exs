@@ -2,18 +2,19 @@ defmodule BlogPhx.CommentsTest do
   @moduledoc false
   use BlogPhx.DataCase
 
+  alias BlogPhx.Accounts
   alias BlogPhx.Comments
+  alias BlogPhx.Comments.Comment
+  alias BlogPhx.Posts.PostTest
 
   describe "comments" do
-    alias BlogPhx.Comments.Comment
-    alias BlogPhx.Posts.PostTest
-
     @valid_attrs %{content: "some content"}
     @update_attrs %{content: "some updated content"}
     @invalid_attrs %{content: nil}
 
     def comment_fixture(attrs \\ %{}) do
       post = PostTest.post_fixture()
+      user = BlogPhx.Accounts.get_user!(1)
 
       attr =
         attrs
@@ -21,7 +22,7 @@ defmodule BlogPhx.CommentsTest do
 
       {:ok, comment} =
         post.id
-        |> Comments.create_comment(attr)
+        |> Comments.create_comment(user.id, attr)
 
       comment
     end
@@ -38,7 +39,8 @@ defmodule BlogPhx.CommentsTest do
 
     test "create_comment/1 with valid data creates a comment" do
       post = PostTest.post_fixture()
-      assert {:ok, %Comment{} = comment} = Comments.create_comment(post.id, @valid_attrs)
+      user = Accounts.get_user!(1)
+      assert {:ok, %Comment{} = comment} = Comments.create_comment(post.id, user.id, @valid_attrs)
       assert comment.content == "some content"
     end
 

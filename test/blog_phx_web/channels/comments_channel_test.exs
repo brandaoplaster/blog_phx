@@ -13,8 +13,10 @@ defmodule BlogPhxWeb.CommentsChannelTest do
 
   setup do
     user = Accounts.get_user!(1)
+    token = Phoenix.Token.sign(BlogPhxWeb.Endpoint, "blog_phx", user.id)
+
     {:ok, post} = Posts.create_post(user, @valid_post)
-    {:ok, socket} = connect(UserSocket, %{})
+    {:ok, socket} = connect(UserSocket, %{"token" => token})
 
     {:ok, socket: socket, post: post}
   end
@@ -27,7 +29,7 @@ defmodule BlogPhxWeb.CommentsChannelTest do
   end
 
   test "when to create a new comment", %{socket: socket, post: post} do
-    {:ok, comments, socket} = subscribe_and_join(socket, "comments:#{post.id}", %{})
+    {:ok, _comments, socket} = subscribe_and_join(socket, "comments:#{post.id}", %{})
 
     ref = push(socket, "comment:add", %{"content" => "test comment"})
 

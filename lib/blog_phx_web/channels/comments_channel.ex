@@ -12,7 +12,7 @@ defmodule BlogPhxWeb.CommentsChannel do
   def handle_in("comment:add", content, socket) do
     response =
       socket.assigns.post_id
-      |> BlogPhx.Comments.create_comment(content)
+      |> BlogPhx.Comments.create_comment(socket.assigns.user_id, content)
 
     case response do
       {:ok, comment} ->

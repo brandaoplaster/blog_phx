@@ -3,7 +3,10 @@ defmodule BlogPhx.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias BlogPhx.Comments.Comment
   alias BlogPhx.Posts.Post
+
+  @derive {Jason.Encoder, only: [:email, :image]}
 
   schema "users" do
     field :email, :string
@@ -14,6 +17,8 @@ defmodule BlogPhx.Accounts.User do
     field :token, :string
 
     has_many :posts, Post
+    has_many :comments, Comment
+
     timestamps()
   end
 

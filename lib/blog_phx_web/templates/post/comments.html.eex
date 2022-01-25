@@ -1,0 +1,31 @@
+<%= if @conn.assigns.user do %>
+  <div class="row">
+    <form class="col s12">
+      <div class="row">
+        <div class="input-field col s10">
+          <textarea id="comment" class="materialize-textarea"></textarea>
+          <label for="comment">Comment</label>
+        </div>
+
+        <div class="input-field col s2">
+          <a class="btn waves-effect waves-light" id="btn-comment">
+            Submit
+            <i class="material-icons right">send</i>
+          </a>
+        </div>
+      </div>
+    </form>
+  </div>
+<% end %>
+
+<div class="section">
+  <ul class="collection">
+
+  </ul>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    window.createSocket( <%= @post.id %> )
+  })
+</script>
