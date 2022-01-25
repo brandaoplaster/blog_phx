@@ -8,7 +8,6 @@ defmodule BlogPhx.CommentsTest do
   alias BlogPhx.Posts.PostTest
 
   describe "comments" do
-
     @valid_attrs %{content: "some content"}
     @update_attrs %{content: "some updated content"}
     @invalid_attrs %{content: nil}
